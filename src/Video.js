@@ -5,15 +5,29 @@ const Video = ({ peer, name }) => {
 
   useEffect(() => {
     if (peer) {
-      peer.on('stream', (stream) => {
+      peer.on('stream', stream => {
         refVideo.current.srcObject = stream;
       });
     }
   }, [peer]);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <video autoPlay ref={refVideo} playsInline />
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        margin: '50px',
+      }}
+    >
+      <video
+        autoPlay
+        ref={refVideo}
+        playsInline
+        style={{
+          width: '500px',
+          height: '500px',
+        }}
+      />
       <span>{name}</span>
     </div>
   );

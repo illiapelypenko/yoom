@@ -5,6 +5,8 @@ const chance = new Chance();
 
 const Home = ({ history }) => {
   const [roomId, setRoomId] = useState('');
+  const [device, setDevice] = useState('screen');
+  const [name, setName] = useState('');
 
   return (
     <div>
@@ -20,7 +22,7 @@ const Home = ({ history }) => {
             alert('RoomId is required');
             return;
           }
-          history.push(`/room/${roomId}`);
+          history.push(`/room/${roomId}?device=${device}&name=${name}`);
         }}
       >
         Join Room
@@ -29,11 +31,20 @@ const Home = ({ history }) => {
         type='button'
         onClick={() => {
           const id = chance.guid();
-          history.push(`/room/${id}`);
+          history.push(`/room/${id}?device=${device}&name=${name}`);
         }}
       >
         Create Room
       </button>
+      <br />
+      <button
+        onClick={() => setDevice(device === 'screen' ? 'video' : 'screen')}
+      >
+        {device === 'screen' ? 'turn video' : 'turn screen'}
+      </button>
+      <br />
+      <label>Name</label>
+      <input type='text' value={name} onChange={e => setName(e.target.value)} />
     </div>
   );
 };
